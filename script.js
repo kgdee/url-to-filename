@@ -1,18 +1,23 @@
+const msg = document.querySelector(".msg")
 
-function convertClipboardText() {
-  navigator.clipboard
-    .readText()
-    .then((text) => {
-      const convertedText = text.replace(/[\/?]/g, " ");
-      navigator.clipboard
-        .writeText(convertedText)
-        .then(() => alert("Clipboard text converted and copied to clipboard!"))
-        .catch((err) => console.error("Error writing to clipboard", err));
-    })
-    .catch((error) => {
-      console.error(error)
-      alert(error)
-    });
+async function convertClipboardText() {
+  msg.textContent = ""
+  try {
+    const clipboardText = await navigator.clipboard.readText()
+    const convertedText = clipboardText.replace(/[\/?]/g, " ");
+
+    await navigator.clipboard.writeText(convertedText)
+
+    msg.textContent = "Done! Clipboard text converted!"
+  } catch (error) {
+    console.error(error)
+    
+    if (error.name === 'NotAllowedError') {
+      msg.textContent = "Error: Clipboard permissions not granted!";
+    } else {
+      msg.textContent = "An error occurred while working with the clipboard.";
+    }
+  }
 }
 
 navigator.clipboard.readText()
