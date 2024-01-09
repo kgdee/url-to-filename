@@ -56,10 +56,12 @@ body {
 .converter textarea {
   border: 1px solid #999;
   padding: 5px;
-  min-width: 250px;
-  min-height: 25px;
-  max-width: calc(100% - 20px);
-  max-height: 200px;
+  width: 800px;
+  height: 200px;
+  min-width: 280px;
+  min-height: 100px;
+  max-width: calc(100% - 10px);
+  max-height: 250px;
 }
 
 .converter .convert {
