@@ -53,6 +53,15 @@ body {
   gap: 10px;
 }
 
+.converter textarea {
+  border: 1px solid #999;
+  padding: 5px;
+  min-width: 250px;
+  min-height: 25px;
+  max-width: calc(100% - 20px);
+  max-height: 200px;
+}
+
 .converter .convert {
   padding: 20px 10px;
   background-color: blue;
@@ -60,6 +69,7 @@ body {
   border-radius: 10px;
   font-weight: bold;
   font-size: 1.25rem;
+  min-width: 250px;
 }
 
 .converter .msg {

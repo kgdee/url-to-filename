@@ -1,3 +1,5 @@
+const textInput = document.querySelector(".text-input")
+const convertBtn = document.querySelector(".convert")
 const msg = document.querySelector(".msg")
 const preview = document.querySelector(".preview")
 const helpModal = document.querySelector(".help-modal")
@@ -16,20 +18,25 @@ const symbols = [
 
 if (document.hasFocus()) navigator.clipboard.readText()
 
-async function convertClipboardText() {
+
+function updateConvertBtn() {
+  convertBtn.innerHTML = textInput.value ? "Convert" : "Convert Clipboard Text"
+}
+
+async function convertText() {
   msg.textContent = ""
   try {
-    const clipboardText = await navigator.clipboard.readText()
+    const text = textInput.value || await navigator.clipboard.readText()
     
-    const clipboardIsUrl = symbols.some(symbol => clipboardText.includes(symbol))
+    const textIsUrl = symbols.some(symbol => text.includes(symbol))
     
     let convertedText = ""
-    if (clipboardIsUrl) {
-      convertedText = clipboardText.replace(/[\\/:*?"<>|]/g, function(match) {
+    if (textIsUrl) {
+      convertedText = text.replace(/[\\/:*?"<>|]/g, function(match) {
         return `[${symbols.indexOf(match)}]`
       }); 
     } else {
-      convertedText = clipboardText.replace(/\[(\d)\]/g, (match, index) => {
+      convertedText = text.replace(/\[(\d)\]/g, (match, index) => {
         return symbols[index] || match;
       })
     }
