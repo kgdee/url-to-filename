@@ -10,10 +10,25 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="container">
+    <div class="converter container">
       <h1>URL to filename</h1>
-      <button onclick="convertClipboardText()">Convert Clipboard Text</button>
+      <button class="convert" onclick="convertClipboardText()">Convert Clipboard Text</button>
       <div class="msg">Welcome! Click the button to convert your clipboard text!</div>
+
+      <div class="preview"></div>
+      <button class="help" onclick="toggleHelpModal()"><i class="bi bi-question"></i></button>
     </div>
+
+    <div class="help-modal hidden" onclick="toggleHelpModal()">
+      <div class="modal-content" onclick="stopPropagation(event)">
+        <button class="close" onclick="toggleHelpModal()">
+          <i class="bi bi-x"></i>
+        </button>
+        <p>
+          Symbol Mapping:
+        </p>
+      </div>
+    </div>
+
   </body>
 </html>
